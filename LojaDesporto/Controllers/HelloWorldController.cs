@@ -10,6 +10,24 @@ namespace LojaDesporto.Controllers
     {
         public IActionResult Index()
         {
+
+            int hora = DateTime.Now.Hour;
+
+            string mensagem;
+            if(hora>=7 && hora<12)
+            {
+                mensagem = "Bom dia";
+            } else if (hora>=12 && hora < 20)
+            {
+                mensagem = "Boa tarde";
+            }
+            else
+            {
+                mensagem = "Boa noite";
+            }
+
+            ViewBag.Mensagem = mensagem;
+
             return View();
         }
 

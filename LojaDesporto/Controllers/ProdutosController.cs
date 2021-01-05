@@ -90,10 +90,14 @@ namespace LojaDesporto.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProdutoId,Nome,Descricao,Preco")] Produto produto)
         {
+
+
             if (id != produto.ProdutoId)
             {
                 return NotFound();
             }
+
+           
 
             if (ModelState.IsValid)
             {
@@ -110,10 +114,14 @@ namespace LojaDesporto.Controllers
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError("", "Ocorreu um erro. Não foi possivel guardar o produto. Tente novamente e se o problema persistir, contacte a assistência");
+                        return View(produto);
+                        //throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                ViewBag.Mensagem="Produto Alterado com sucesso";
+                return View("Sucesso");
             }
             return View(produto);
         }
@@ -127,10 +135,14 @@ namespace LojaDesporto.Controllers
             }
 
             var produto = await _context.Produto
-                .FirstOrDefaultAsync(m => m.ProdutoId == id);
+                .SingleOrDefaultAsync(p => p.ProdutoId == id);
+
+
             if (produto == null)
             {
-                return NotFound();
+                //return NotFound();
+                ViewBag.Mensagem = "O Produto que estava a tentar apagar já tinha sido eliminado";
+                return View("Sucesso");
             }
 
             return View(produto);
@@ -144,12 +156,14 @@ namespace LojaDesporto.Controllers
             var produto = await _context.Produto.FindAsync(id);
             _context.Produto.Remove(produto);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+            ViewBag.Mensagem = "Produto eliminado com sucesso";
+            return View("Sucesso");
         }
 
         private bool ProdutoExists(int id)
         {
-            return _context.Produto.Any(e => e.ProdutoId == id);
+            return _context.Produto.Any(p => p.ProdutoId == id);
         }
     }
 }

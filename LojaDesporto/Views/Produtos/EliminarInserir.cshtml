@@ -15,32 +15,36 @@
 
 </div>
 
-<div>
-    <h4>Detalhes do Produto</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Preco)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Preco) €
-        </dd>
-    </dl>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preco" class="control-label"></label>
+                <input asp-for="Preco" class="form-control" />
+                <span asp-validation-for="Preco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Adicionar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-danger">Descartar</a>
+            </div>
+        </form>
+    </div>
 </div>
-<div>
-    <a class="btn btn-primary" asp-action="Create" asp-route-product="@Model">Inserir</a> |
-    <a class="btn btn-danger" asp-action="Index">Descartar</a>
-</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

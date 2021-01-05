@@ -1,0 +1,46 @@
+﻿@model Produto
+
+@{
+    ViewData["Title"] = "Produto Eliminado";
+}
+
+<div class="card text-white bg-danger mb-3">
+    @*<div class="card-header">ViewBag.Title</div>*@
+    <div class="card-body">
+        <h5 class="card-title">@ViewBag.Title</h5>
+        <p class="card-text">O produto que estava a editar foi eliminado</p>
+
+
+    </div>
+
+</div>
+
+<div>
+    <h4>Detalhes do Produto</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Preco)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Preco) €
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Create" asp-route-product="@Model">Inserir</a> |
+    <a class="btn btn-danger" asp-action="Index">Descartar</a>
+</div>
+

@@ -34,10 +34,10 @@ namespace LojaDesporto.Controllers
             }
 
             var produto = await _context.Produto
-                .FirstOrDefaultAsync(m => m.ProdutoId == id);
+                .SingleOrDefaultAsync(m => m.ProdutoId == id);
             if (produto == null)
             {
-                return NotFound();
+                return View("Inexistente");
             }
 
             return View(produto);
@@ -60,7 +60,9 @@ namespace LojaDesporto.Controllers
             {
                 _context.Add(produto);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                ViewBag.Mensagem = "Produto adicionado com sucesso";
+                return View("Sucesso");
             }
             return View(produto);
         }
@@ -76,7 +78,7 @@ namespace LojaDesporto.Controllers
             var produto = await _context.Produto.FindAsync(id);
             if (produto == null)
             {
-                return NotFound();
+                return View("Inexistente");
             }
             return View(produto);
         }
@@ -104,7 +106,7 @@ namespace LojaDesporto.Controllers
                 {
                     if (!ProdutoExists(produto.ProdutoId))
                     {
-                        return NotFound();
+                        return View("EliminarInserir", produto);
                     }
                     else
                     {

@@ -58,6 +58,12 @@ namespace LojaDesporto.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(produto.Preco<=0)
+                {
+                    ModelState.AddModelError("Preco", "O preço deve ser maior que 0");
+                    return View(produto);
+                }
+
                 _context.Add(produto);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
@@ -101,6 +107,13 @@ namespace LojaDesporto.Controllers
 
             if (ModelState.IsValid)
             {
+
+                if (produto.Preco <= 0)
+                {
+                    ModelState.AddModelError("Preco", "O preço deve ser maior que 0");
+                    return View(produto);
+                }
+
                 try
                 {
                     _context.Update(produto);
@@ -124,6 +137,7 @@ namespace LojaDesporto.Controllers
                 return View("Sucesso");
             }
             return View(produto);
+            
         }
 
         // GET: Produtos/Delete/5

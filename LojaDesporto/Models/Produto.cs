@@ -17,6 +17,13 @@ namespace LojaDesporto.Models
         public string Descricao { get; set; }
 
         [Required(ErrorMessage = "Deve preencher o preço")]
+        
         public decimal Preco { get; set; }
+
+        //exemplo das expressões regulares
+        //[Required]
+        //[RegularExpression(@"(9[1236]|2\d)\d{7}",ErrorMessage ="Telefone inválido")]
+        //public string Telefone { get; set; }
+
     }
 }
